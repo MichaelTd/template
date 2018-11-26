@@ -1,1 +1,1 @@
-CODE_OF_MERIT.md
+code_of_merit.md
