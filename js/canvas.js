@@ -9,7 +9,7 @@
   // more siblings == bigger node
   SIBLINGS_LIMIT = 10;
   // default node margin
-  DENSITY = 50;
+  DENSITY = 100;
   // total number of nodes used (incremented after creation)
   NODES_QTY = 0;
   // avoid nodes spreading
@@ -28,6 +28,7 @@
     y: canvas.height / 2
   };
   ctx = canvas.getContext('2d');
+
   if (!ctx) {
     alert("Ooops! Your browser does not support canvas :'(");
   }
@@ -46,7 +47,7 @@
   }
 
   Node.prototype.drawNode = function() {
-    var color = "rgba(0, 0, 255, " + this.brightness + ")";
+    var color = "rgba(0, 0, 0, " + this.brightness + ")";
     ctx.beginPath();
     ctx.arc(this.x, this.y, 2 * this.radius + 2 * this.siblings.length / SIBLINGS_LIMIT, 0, circ);
     ctx.fillStyle = color;
@@ -55,7 +56,7 @@
 
   Node.prototype.drawConnections = function() {
     for (var i = 0; i < this.siblings.length; i++) {
-      var color = "rgba(0, 0, 255, " + this.brightness + ")";
+      var color = "rgba(0, 0, 0, " + this.brightness + ")";
       ctx.beginPath();
       ctx.moveTo(this.x, this.y);
       ctx.lineTo(this.siblings[i].x, this.siblings[i].y);
@@ -142,6 +143,7 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     findSiblings();
     var i, node, distance;
+
     for (i = 0; i < NODES_QTY; i++) {
       node = nodes[i];
       distance = calcDistance({
@@ -154,6 +156,7 @@
         node.brightness = 0;
       }
     }
+
     for (i = 0; i < NODES_QTY; i++) {
       node = nodes[i];
       if (node.brightness) {
